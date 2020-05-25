@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Covid</string>
+    <string name="inicio">Iniciar Sesión</string>
+    <string name="registro">Crear Cuenta</string>
+    <string name="covid">COVID 19</string>
+    <string name="Crearcuenta">Crear Cuenta</string>
+    <string name="username">Usuario</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+</resources>
