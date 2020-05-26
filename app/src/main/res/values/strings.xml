@@ -7,4 +7,7 @@
     <string name="username">Usuario</string>
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
+    <string name="passwordcon">Confirma Contraseña</string>
+    <string name="save">Guardar</string>
+    <string name="TengoCuenta">¿Tienes una cuenta? Inicia Sesión</string>
 </resources>
