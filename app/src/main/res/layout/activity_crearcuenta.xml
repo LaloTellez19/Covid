@@ -20,7 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userTil"
         android:layout_width="match_parent"
@@ -35,7 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTv"
         app:startIconDrawable="@mipmap/usuario">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userTxt"
             android:layout_width="match_parent"
@@ -56,7 +54,6 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/userTil"
     app:startIconDrawable="@mipmap/email">
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/emailTxt"
         android:layout_width="match_parent"
@@ -77,7 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTil"
         app:startIconDrawable="@mipmap/password">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passTxt"
             android:layout_width="match_parent"
@@ -98,7 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passTil"
         app:startIconDrawable="@mipmap/password">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/conpassTxt"
             android:layout_width="match_parent"
@@ -113,13 +108,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/redondo"
+        app:startIconDrawable="@mipmap/guardar"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:theme="@style/MatButton"
         android:textColor="@color/letra"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conpassTil"
-        app:startIconDrawable="@mipmap/guardar">
+        >
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
@@ -127,7 +124,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="150dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:theme="@style/MatButton1"
+        android:layout_marginTop="100dp"
         android:background="@color/fondo"
         android:layout_marginEnd="16dp"
         android:textColor="@color/letra"
@@ -136,7 +135,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/savebtn">
     </com.google.android.material.button.MaterialButton>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
