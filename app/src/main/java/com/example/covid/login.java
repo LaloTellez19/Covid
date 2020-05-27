@@ -1,31 +1,33 @@
 package com.example.covid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
-    Button login, create;
+public class login extends AppCompatActivity {
+    EditText usuario, contraseña;
+    Button login, cuenta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        login = (Button) findViewById(R.id.btnLogin);
-        create = (Button) findViewById(R.id.btnCreate);
+        setContentView(R.layout.activity_login);
+        usuario = (EditText) findViewById(R.id.userTxt);
+        contraseña=(EditText)findViewById(R.id.passTxt);
+        login = (Button) findViewById(R.id.loginBtn);
+        cuenta=(Button) findViewById(R.id.crearbtn);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),login.class);
-                startActivityForResult(intent,0);
+
             }
         });
 
-        create.setOnClickListener(new View.OnClickListener() {
+        cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),crearcuenta.class);

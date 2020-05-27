@@ -3,119 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/fondo"
-    tools:context=".crearcuenta" >
-
+    android:layout_height="match_parent"
+    tools:context=".login">
     <TextView
-        android:id="@+id/titleTv"
+        android:id="@+id/loginTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/Crearcuenta"
+        android:text="@string/InicioSesion"
         android:textColor="@color/letra"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userTil"
+        android:id="@+id/userFragLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/username"
         android:textColorHint="@color/letra"
         app:hintTextColor="@color/letra"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTv"
+        app:layout_constraintTop_toBottomOf="@id/loginTxt"
         app:startIconDrawable="@mipmap/usuario">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userTxt"
+            android:id="@+id/userFragTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/emailTil"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginEnd="16dp"
-    android:hint="@string/email"
-    android:textColorHint="@color/letra"
-    app:hintTextColor="@color/letra"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/userTil"
-    app:startIconDrawable="@mipmap/email">
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/emailTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passTil"
+        android:id="@+id/passFragLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/password"
         android:textColorHint="@color/letra"
         app:hintTextColor="@color/letra"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailTil"
-        app:startIconDrawable="@mipmap/password">
+        app:layout_constraintTop_toBottomOf="@id/userFragLay"
+        app:startIconDrawable="@mipmap/email">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passTxt"
+            android:id="@+id/passFragTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/conpassTil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/passwordcon"
-        android:textColorHint="@color/letra"
-        app:hintTextColor="@color/letra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passTil"
-        app:startIconDrawable="@mipmap/password">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/conpassTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/savebtn"
+        android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
         app:startIconDrawable="@mipmap/guardar"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         android:theme="@style/MatButton"
         android:textColor="@color/letra"
-        android:text="@string/save"
+        android:text="@string/IniciarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/conpassTil"
+        app:layout_constraintTop_toBottomOf="@id/passFragLay"
         >
     </com.google.android.material.button.MaterialButton>
 
@@ -126,13 +84,13 @@
         android:layout_marginStart="16dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
         android:theme="@style/MatButton1"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:background="@color/fondo"
         android:layout_marginEnd="16dp"
         android:textColor="@color/letra"
-        android:text="@string/TengoCuenta"
+        android:text="@string/NoTengoCuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/savebtn">
+        app:layout_constraintTop_toBottomOf="@id/loginBtn">
     </com.google.android.material.button.MaterialButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
