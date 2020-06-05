@@ -26,12 +26,12 @@ public class ContinentesFragment extends Fragment {
         europaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment paises = new FragmentPaises();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+               FragmentPaises fragmentPaises = new FragmentPaises();
+                FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.paises,paises);
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.continentes, fragmentPaises);
                 fragmentTransaction.commit();
+               
             }
         });
         asiaim.setOnClickListener(new View.OnClickListener() {
