@@ -13,10 +13,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class ContinentesFragment extends Fragment {
+    static final String TAG = "ContinentesFragment";
     ImageView europaim, asiaim, americaim,africaim, oceaniaim;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_continentes,container,false);
         europaim = (ImageView) view.findViewById(R.id.europa);
         asiaim = (ImageView) view.findViewById(R.id.asia);
@@ -27,11 +29,10 @@ public class ContinentesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                FragmentPaises fragmentPaises = new FragmentPaises();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.continentes, fragmentPaises);
-                fragmentTransaction.commit();
-               
+               getActivity().getSupportFragmentManager().beginTransaction()
+                       .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
+                       .addToBackStack(FragmentPaises.TAG)
+                       .commit();
             }
         });
         asiaim.setOnClickListener(new View.OnClickListener() {

@@ -10,5 +10,12 @@ public class Covid extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_covid);
+
+        if (savedInstanceState == null) {
+            ContinentesFragment continentesFragment = new ContinentesFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, continentesFragment, ContinentesFragment.TAG)
+                    .commit();
+        }
     }
 }
