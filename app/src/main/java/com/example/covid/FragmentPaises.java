@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentPaises extends Fragment {
+    static final String TAG = "FragmentPaises";
     TextView buscar;
     RecyclerView lista;
     @Nullable
