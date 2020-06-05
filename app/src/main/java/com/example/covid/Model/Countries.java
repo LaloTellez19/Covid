@@ -1,6 +1,6 @@
 package com.example.covid.Model;
 
-public class CountriesEurope {
+public class Countries {
     public String getName() {
         return name;
     }

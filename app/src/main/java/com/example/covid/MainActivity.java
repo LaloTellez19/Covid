@@ -1,15 +1,11 @@
 package com.example.covid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.covid.Model.CountriesEurope;
 
 public class MainActivity extends AppCompatActivity {
     Button login, create;
