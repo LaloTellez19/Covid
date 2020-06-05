@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.covid.Model.CountriesEurope;
+
 public class MainActivity extends AppCompatActivity {
     Button login, create;
     @Override
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),login.class);
+                Intent intent = new Intent(v.getContext(), Main2Activity.class);
                 startActivityForResult(intent,0);
             }
         });
