@@ -20,7 +20,7 @@ public class FragmentPaises extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.paisesfragment,container,false);
         buscar = (TextView) view.findViewById(R.id.txtBuscarPais);
-        lista = (RecyclerView) view.findViewById(R.id.rvPaises);
+        //lista = (RecyclerView) view.findViewById(R.id.rvPaises);
         return view;
     }
 

@@ -9,44 +9,52 @@
 
     <TextView
         android:id="@+id/txtPais"
-        android:layout_width="234dp"
-        android:layout_height="44dp"
+        android:layout_width="246dp"
+        android:layout_height="35dp"
         android:layout_marginStart="184dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="150dp"
         android:text="@string/SeleccionePais"
         android:textColor="@color/letra"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtBuscarPais"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtBuscarPais"
         android:layout_width="228dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/Pais"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textColor="@color/letra"
         android:textColorHint="@color/letra"
-        app:layout_constraintBottom_toTopOf="@+id/rvPaises"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPais" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPaises"
-        android:layout_width="175dp"
-        android:layout_height="84dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="185dp" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="344dp"
+        android:layout_height="444dp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="163dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/json"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/letra"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
