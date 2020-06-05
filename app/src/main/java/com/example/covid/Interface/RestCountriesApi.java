@@ -16,6 +16,6 @@ public interface RestCountriesApi {
     Call<List<Countries>> getAmericas();
     @GET("rest/v2/region/africa")
     Call<List<Countries>> getAfrica();
-    @GET("rest/v2/region/oceanica")
+    @GET("rest/v2/region/oceania")
     Call<List<Countries>> getOceania();
 }

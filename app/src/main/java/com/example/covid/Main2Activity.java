@@ -23,7 +23,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         europe = (TextView) findViewById(R.id.json);
-        getAsia();
+        getOceania();
     }
 
     private void getEurope()
@@ -80,6 +80,102 @@ public class Main2Activity extends AppCompatActivity {
                 {
                     String content = "";
                     content += countriesAsia.getName()+"\n\n";
+                    europe.append(content);
+                }
+            }
+            //Error
+            @Override
+            public void onFailure(Call<List<Countries>> call, Throwable t) {
+                europe.setText(t.getMessage());
+            }
+        });
+    }
+    private void getAmerica()
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://restcountries.eu/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final RestCountriesApi restCountriesApi = retrofit.create(RestCountriesApi.class);
+        Call<List<Countries>> call = restCountriesApi.getAmericas();
+        call.enqueue(new Callback<List<Countries>>() {
+            //Respuesta
+            @Override
+            public void onResponse(Call<List<Countries>> call, Response<List<Countries>> response) {
+                if(!response.isSuccessful())
+                {
+                    europe.setText("Codigo: "+response.code());
+                    return;
+                }
+                List<Countries> americaList = response.body();
+                for(Countries countriesAmerica: americaList)
+                {
+                    String content = "";
+                    content += countriesAmerica.getName()+"\n\n";
+                    europe.append(content);
+                }
+            }
+            //Error
+            @Override
+            public void onFailure(Call<List<Countries>> call, Throwable t) {
+                europe.setText(t.getMessage());
+            }
+        });
+    }
+    private void getAfrica()
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://restcountries.eu/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final RestCountriesApi restCountriesApi = retrofit.create(RestCountriesApi.class);
+        Call<List<Countries>> call = restCountriesApi.getAfrica();
+        call.enqueue(new Callback<List<Countries>>() {
+            //Respuesta
+            @Override
+            public void onResponse(Call<List<Countries>> call, Response<List<Countries>> response) {
+                if(!response.isSuccessful())
+                {
+                    europe.setText("Codigo: "+response.code());
+                    return;
+                }
+                List<Countries> africaList = response.body();
+                for(Countries countriesAfrica: africaList)
+                {
+                    String content = "";
+                    content += countriesAfrica.getName()+"\n\n";
+                    europe.append(content);
+                }
+            }
+            //Error
+            @Override
+            public void onFailure(Call<List<Countries>> call, Throwable t) {
+                europe.setText(t.getMessage());
+            }
+        });
+    }
+    private void getOceania()
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://restcountries.eu/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final RestCountriesApi restCountriesApi = retrofit.create(RestCountriesApi.class);
+        Call<List<Countries>> call = restCountriesApi.getOceania();
+        call.enqueue(new Callback<List<Countries>>() {
+            //Respuesta
+            @Override
+            public void onResponse(Call<List<Countries>> call, Response<List<Countries>> response) {
+                if(!response.isSuccessful())
+                {
+                    europe.setText("Codigo: "+response.code());
+                    return;
+                }
+                List<Countries> oceaniaList = response.body();
+                for(Countries countriesOceania: oceaniaList)
+                {
+                    String content = "";
+                    content += countriesOceania.getName()+"\n\n";
                     europe.append(content);
                 }
             }
