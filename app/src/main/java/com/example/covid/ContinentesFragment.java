@@ -97,7 +97,10 @@ public class ContinentesFragment extends Fragment {
             public void onClick(View v) {
                 getOceania();
                 FragmentPaises fragmentPaises = new FragmentPaises();
-
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
+                        .addToBackStack(FragmentPaises.TAG)
+                        .commit();
 
             }
         });
