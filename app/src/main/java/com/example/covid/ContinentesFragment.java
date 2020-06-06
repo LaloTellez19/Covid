@@ -1,11 +1,13 @@
 package com.example.covid;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +23,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+enum Continente {
+    Asia,
+    America,
+    Europa,
+    Africa,
+    Oceania
+}
 
 public class ContinentesFragment extends Fragment {
     static final String TAG = "ContinentesFragment";
@@ -40,12 +50,13 @@ public class ContinentesFragment extends Fragment {
         europaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEurope();
-               FragmentPaises fragmentPaises = new FragmentPaises();
-               getActivity().getSupportFragmentManager().beginTransaction()
-                       .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
-                       .addToBackStack(FragmentPaises.TAG)
-                       .commit();
+                getCountriesFor(Continente.Europa);
+//                getEurope();
+//               FragmentPaises fragmentPaises = new FragmentPaises();
+//               getActivity().getSupportFragmentManager().beginTransaction()
+//                       .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
+//                       .addToBackStack(FragmentPaises.TAG)
+//                       .commit();
             }
         });
         asiaim.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +97,8 @@ public class ContinentesFragment extends Fragment {
             public void onClick(View v) {
                 getOceania();
                 FragmentPaises fragmentPaises = new FragmentPaises();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
-                        .addToBackStack(FragmentPaises.TAG)
-                        .commit();
+
+
             }
         });
         return view;
@@ -256,4 +265,66 @@ public class ContinentesFragment extends Fragment {
         });
     }
 
+    private void getCountriesFor(final Continente continente) {
+        getCallFor(continente).enqueue(new Callback<List<Countries>>() {
+            @Override
+            public void onResponse(Call<List<Countries>> call, Response<List<Countries>> response) {
+                if (response.isSuccessful()) {
+                    List<Countries> countries = response.body();
+                    if (countries != null && !countries.isEmpty()) {
+                        Log.d("COUNTRIES", "################## Response ##################");
+                        for(Countries country: countries) {
+                            Log.d("COUNTRIES", country.getName());
+                        }
+                        Log.d("COUNTRIES", "################ End Response ################");
+
+                        showFragmentFor(continente);
+                    } else {
+                        showToastError("¡Ocurrio un error inesperado!");
+                    }
+                } else {
+                    showToastError("¡Ocurrio un error inesperado!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Countries>> call, Throwable t) {
+                showToastError(t.getLocalizedMessage());
+            }
+        });
+
+    }
+
+    private Call<List<Countries>> getCallFor(Continente continente) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://restcountries.eu/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final RestCountriesApi restCountriesApi = retrofit.create(RestCountriesApi.class);
+        switch (continente) {
+            case Asia:
+                return restCountriesApi.getAsia();
+            case America:
+                return restCountriesApi.getAmericas();
+            case Europa:
+                return restCountriesApi.getEurope();
+            case Africa:
+                return restCountriesApi.getAfrica();
+            case Oceania:
+                return restCountriesApi.getOceania();
+        }
+        return null;
+    }
+
+    private void showFragmentFor(Continente continente) {
+        FragmentPaises fragmentPaises = new FragmentPaises();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
+                .addToBackStack(FragmentPaises.TAG)
+                .commit();
+    }
+
+    private void showToastError(String error) {
+        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+    }
 }
