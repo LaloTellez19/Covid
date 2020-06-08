@@ -97,7 +97,7 @@ public class ContinentesFragment extends Fragment {
                         }
                         Log.d("COUNTRIES", "################ End Response ################");
 
-                        showFragmentFor(continente);
+                        showFragmentFor(continente, countries);
 
                     } else {
                         showToastError("¡Ocurrio un error inesperado!");
@@ -136,8 +136,9 @@ public class ContinentesFragment extends Fragment {
         return null;
     }
 
-    private void showFragmentFor(Continente continente) {
+    private void showFragmentFor(Continente continente, List<Countries> countries) {
         FragmentPaises fragmentPaises = new FragmentPaises();
+        fragmentPaises.countries = countries;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
                 .addToBackStack(FragmentPaises.TAG)
