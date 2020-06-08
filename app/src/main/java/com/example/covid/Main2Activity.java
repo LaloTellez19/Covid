@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.example.covid.Interface.RestApiCovid;
 import com.example.covid.Model.Case;
 import com.example.covid.Model.Countries;
+import com.example.covid.Model.Country;
+import com.example.covid.Model.Summary;
 
 import java.util.List;
 
@@ -33,32 +35,32 @@ public class Main2Activity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         final RestApiCovid restApiCovid = retrofit.create(RestApiCovid.class);
-        Call<List<Case>> call = restApiCovid.getCases();
-        call.enqueue(new Callback<List<Case>>() {
+        Call<Summary> call = restApiCovid.getCases();
+        call.enqueue(new Callback<Summary>() {
             @Override
-            public void onResponse(Call<List<Case>> call, Response<List<Case>> response) {
+            public void onResponse(Call<Summary> call, Response<Summary> response) {
                 if(!response.isSuccessful())
                 {
                     europe.setText("Codigo: "+response.code());
                     return;
                 }
-                List<Case> caseList = response.body();
-                for(Case caseworld: caseList)
+                List<Country> countriesCases = response.body().countries;
+                for(Country country: countriesCases)
                 {
                     String content = "";
-                    content += caseworld.getCountry()+"\n";
-                    content += caseworld.getNewConfirmed()+"\n";
-                    content += caseworld.getTotalConfirmed()+"\n";
-                    content += caseworld.getNewDeaths()+"\n";
-                    content += caseworld.getTotalDeaths()+"\n";
-                    content += caseworld.getNewRecovered()+"\n";
-                    content += caseworld.getTotalRecovered()+"\n\n";
+                    content += country.getCountry()+"\n";
+                    content += country.getNewConfirmed()+"\n";
+                    content += country.getTotalConfirmed()+"\n";
+                    content += country.getNewDeaths()+"\n";
+                    content += country.getTotalDeaths()+"\n";
+                    content += country.getNewRecovered()+"\n";
+                    content += country.getTotalRecovered()+"\n\n";
                     europe.append(content);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Case>> call, Throwable t) {
+            public void onFailure(Call<Summary> call, Throwable t) {
                 europe.setText(t.getMessage());
             }
         });
