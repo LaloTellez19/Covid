@@ -1,9 +1,15 @@
 package com.example.covid;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,17 +17,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class FragmentPaises extends Fragment {
     static final String TAG = "FragmentPaises";
-    TextView buscar;
+    EditText buscar;
     RecyclerView lista;
+    ProgressBar progress;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.paisesfragment,container,false);
-        buscar = (TextView) view.findViewById(R.id.txtBuscarPais);
-        //lista = (RecyclerView) view.findViewById(R.id.rvPaises);
+        buscar = (EditText) view.findViewById(R.id.txtBuscarPais);
+        progress=(ProgressBar)view.findViewById(R.id.pbPaises);
+        progress.getIndeterminateDrawable().setColorFilter(Color.parseColor("#0091EA"), PorterDuff.Mode.SRC_IN);
+        progress.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progress.setVisibility(View.GONE);
+            }
+        },2000);
         return view;
     }
-
 }
