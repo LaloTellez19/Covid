@@ -144,6 +144,7 @@ public class ContinentesFragment extends Fragment {
                 .replace(R.id.fragment_container, fragmentPaises, FragmentPaises.TAG)
                 .addToBackStack(FragmentPaises.TAG)
                 .commit();
+        getActivity().setTitle("Seleccione Un Pais");
     }
 
     private void showToastError(String error) {

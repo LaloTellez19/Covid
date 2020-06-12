@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("COVID 19");
         setContentView(R.layout.activity_main);
         login = (Button) findViewById(R.id.btnLogin);
         create = (Button) findViewById(R.id.btnCreate);

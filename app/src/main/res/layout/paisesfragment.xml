@@ -5,48 +5,20 @@
     android:id="@+id/paises"
     android:layout_width="match_parent"
     android:background="@color/fondo"
+    android:layout_gravity="center"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/imagePaisrv"
-        android:layout_width="246dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="150dp"
-        android:text="@string/SeleccionePais"
-        android:textColor="@color/letra"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.593"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtBuscarPais"
-        android:layout_width="228dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/Pais"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColor="@color/letra"
-        android:textColorHint="@color/letra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagePaisrv" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRecyclerFragmet"
-        android:layout_width="304dp"
-        android:layout_height="207dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="1dp"
+        android:layout_width="328dp"
+        android:layout_height="723dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBuscarPais" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

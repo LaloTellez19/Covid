@@ -7,35 +7,20 @@
     android:id="@+id/continentes"
     android:background="@color/fondo">
 
-    <TextView
-        android:id="@+id/Continente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="91dp"
-        android:text="@string/Continente"
-        android:textColor="@color/letra"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/europa"
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/Continente"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/europa" />
 
     <ImageButton
@@ -43,14 +28,14 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="40dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
-        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintHorizontal_bias="0.791"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/Continente"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/asi" />
 
     <ImageButton
@@ -58,12 +43,12 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="232dp"
         android:layout_marginRight="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/europa"
@@ -74,7 +59,7 @@
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="232dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
@@ -94,11 +79,11 @@
         android:background="@android:color/transparent"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/africa"
-        app:layout_constraintVertical_bias="0.329"
+        app:layout_constraintVertical_bias="0.504"
         app:srcCompat="@drawable/oceania" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

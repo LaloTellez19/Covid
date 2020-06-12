@@ -19,6 +19,7 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        this.setTitle("Inicio De Sesión");
         usuario = (EditText) findViewById(R.id.userTxt);
         contraseña=(EditText)findViewById(R.id.passTxt);
         login = (Button) findViewById(R.id.loginBtn);

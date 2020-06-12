@@ -15,6 +15,7 @@ public class crearcuenta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Registro");
         setContentView(R.layout.activity_crearcuenta);
         guardar = (Button) findViewById(R.id.savebtn);
         login = (Button) findViewById(R.id.crearbtn);

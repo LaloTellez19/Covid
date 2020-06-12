@@ -3,6 +3,8 @@ package com.example.covid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,11 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covid.Model.Countries;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> {
+public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos>{
 
     List<Countries> countries;
+
+
     @NonNull
     @Override
     public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,7 +38,6 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
     public int getItemCount() {
         return countries.size();
     }
-
     class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView dato;
 
@@ -45,4 +50,5 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
             dato.setText(country.getName());
         }
     }
+
 }
