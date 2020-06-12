@@ -44,7 +44,8 @@ public class FragmentPaises extends Fragment {
         buscar = (EditText) view.findViewById(R.id.txtBuscarPais);
         lista =(RecyclerView)view.findViewById(R.id.idRecyclerFragmet);
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
-        AdapterDatos adapterDatos = new AdapterDatos(countries);
+        AdapterDatos adapterDatos = new AdapterDatos();
+        adapterDatos.countries = countries;
         lista.setAdapter(adapterDatos);
         return view;
     }

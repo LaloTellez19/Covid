@@ -14,8 +14,6 @@ import java.util.List;
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> {
 
-
-
     List<Countries> countries;
     @NonNull
     @Override
@@ -35,15 +33,16 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
         return countries.size();
     }
 
-    public class ViewHolderDatos extends RecyclerView.ViewHolder {
+    class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView dato;
-        public ViewHolderDatos(@NonNull View itemView) {
+
+        ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
-            dato=(TextView)itemView.findViewById(R.id.idDato);
+            dato = itemView.findViewById(R.id.idDato);
         }
 
-        public void asignarDatos(Countries countries) {
-            dato.setText(countries);
+        void asignarDatos(Countries country) {
+            dato.setText(country.getName());
         }
     }
 }
