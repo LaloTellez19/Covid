@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +38,8 @@ import com.example.covid.Model.Countries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FragmentPaises extends Fragment {
     static final String TAG = "FragmentPaises";
@@ -45,6 +49,9 @@ public class FragmentPaises extends Fragment {
     List<Countries> countries;
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
+
+    private AdapterDatos adapterDatos;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class FragmentPaises extends Fragment {
         View view = inflater.inflate(R.layout.paisesfragment,container,false);
         lista =(RecyclerView)view.findViewById(R.id.idRecyclerFragmet);
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
-        AdapterDatos adapterDatos = new AdapterDatos();
+        adapterDatos = new AdapterDatos();
         adapterDatos.countries = countries;
         lista.setAdapter(adapterDatos);
         return view;
@@ -76,9 +83,12 @@ public class FragmentPaises extends Fragment {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
 
             queryTextListener = new SearchView.OnQueryTextListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
-                public boolean onQueryTextChange(String newText) {
-                    Log.i("onQueryTextSubmit", newText);
+                public boolean onQueryTextChange(final String newText) {
+                    Predicate<Countries> likeCountry = countries -> countries.getName().contains(newText);
+                    adapterDatos.countries = countries.stream().filter(likeCountry).collect(Collectors.toList());
+                    adapterDatos.notifyDataSetChanged();
                     return true;
                 }
                 @Override
