@@ -45,6 +45,7 @@ public class ContinentesFragment extends Fragment {
         americaim = (ImageView) view.findViewById(R.id.america);
         africaim = (ImageView) view.findViewById(R.id.africa);
         oceaniaim = (ImageView) view.findViewById(R.id.oceania);
+
         europaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
