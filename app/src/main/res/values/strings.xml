@@ -16,6 +16,9 @@
     <string name="Continente">Seleccione el continente</string>
     <string name="SeleccionePais">Seleccione un Pais</string>
     <string name="Pais">Pais</string>
+    <string name="facebook_app_id">552253505414843</string>
+    <string name="fb_login_protocol_scheme">fb552253505414843</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
