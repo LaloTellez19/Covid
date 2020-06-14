@@ -16,16 +16,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos>{
+public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> implements View.OnClickListener{
 
     List<Countries> countries;
-
+    private View.OnClickListener listener;
 
     @NonNull
     @Override
     public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.itemlist,null,false);
+        view.setOnClickListener(this);
         return new ViewHolderDatos(view);
     }
 
@@ -38,6 +39,19 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
     public int getItemCount() {
         return countries.size();
     }
+    public void setOnClickListener(View.OnClickListener listener)
+    {
+        this.listener=listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(listener != null)
+        {
+            listener.onClick(v);
+        }
+    }
+
     class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView dato;
 

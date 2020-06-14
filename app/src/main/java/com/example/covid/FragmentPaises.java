@@ -25,6 +25,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,6 +62,12 @@ public class FragmentPaises extends Fragment {
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterDatos = new AdapterDatos();
         adapterDatos.countries = countries;
+        adapterDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ;
+            }
+        });
         lista.setAdapter(adapterDatos);
         return view;
     }
