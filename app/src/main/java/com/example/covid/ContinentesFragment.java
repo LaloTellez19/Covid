@@ -1,5 +1,6 @@
 package com.example.covid;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.covid.Interface.RestCountriesApi;
 import com.example.covid.Model.Countries;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -34,7 +37,7 @@ enum Continente {
 
 public class ContinentesFragment extends Fragment {
     static final String TAG = "ContinentesFragment";
-    private TextView textopa;
+    private TextView usertxt;
     ImageView europaim, asiaim, americaim,africaim, oceaniaim;
     @Nullable
     @Override
@@ -45,7 +48,23 @@ public class ContinentesFragment extends Fragment {
         americaim = (ImageView) view.findViewById(R.id.america);
         africaim = (ImageView) view.findViewById(R.id.africa);
         oceaniaim = (ImageView) view.findViewById(R.id.oceania);
+        usertxt = (TextView) view.findViewById(R.id.user);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null)
+        {
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+            if(name != null)
+            {
+                usertxt.setText("BIENVENIDO: "+ name);
+            }else{
+                usertxt.setText("BIENVENIDO: "+ email);
+            }
+
+
+        }
         europaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

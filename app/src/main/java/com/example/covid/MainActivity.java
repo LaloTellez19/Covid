@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -16,6 +18,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     Button login, create;
+    ProgressBar bar;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private FirebaseAuth firebaseAuth;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setTitle("COVID 19");
         setContentView(R.layout.activity_main);
+        bar = (ProgressBar) findViewById(R.id.progressBar1);
         login = (Button) findViewById(R.id.btnLogin);
         create = (Button) findViewById(R.id.btnCreate);
         login.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.btnFacebook);
 
-        if(AccessToken.getCurrentAccessToken()==null)
-        {
+
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     handleFacebookAccessToken(loginResult.getAccessToken());
-                    firebaseAuth.addAuthStateListener(firebaseAuthListener);
                 }
                 @Override
                 public void onCancel() {
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuthListener = new FirebaseAuth.AuthStateListener(){
                 @Override
@@ -100,16 +103,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-        }else{
-            Intent intent = new Intent(this,Covid.class);
-            startActivityForResult(intent,0);
-        }
     }
 
 
 
-    private void handleFacebookAccessToken(AccessToken accessToken) {
 
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+        bar.setVisibility(View.VISIBLE);
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -121,13 +121,18 @@ public class MainActivity extends AppCompatActivity {
                                     "No se pudo Iniciar Sesion", Toast.LENGTH_SHORT);
                     toast1.show();
                 }
-
+                bar.setVisibility(View.GONE);
             }
         });
     }
 
 
     private void goMainScreen() {
+        Intent intent = new Intent(this, Covid.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    private void goMainScreen2() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -137,5 +142,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
     }
 }

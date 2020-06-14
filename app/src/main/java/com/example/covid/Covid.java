@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Covid extends AppCompatActivity {
 
@@ -43,6 +44,7 @@ public class Covid extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.btnCerrar:
+                FirebaseAuth.getInstance().signOut();
                 LoginManager.getInstance().logOut();
                 goLoginScreen();
                 break;
