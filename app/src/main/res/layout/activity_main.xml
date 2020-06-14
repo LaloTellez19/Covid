@@ -9,12 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="431dp"
-        android:layout_height="231dp"
-        android:layout_marginBottom="13dp"
+        android:layout_width="430dp"
+        android:layout_height="230dp"
         android:contentDescription="@string/covid"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/covid" />

@@ -1,5 +1,6 @@
 package com.example.covid;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,16 +18,49 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     Button login, create;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setTitle("COVID 19");
         setContentView(R.layout.activity_main);
+        login = (Button) findViewById(R.id.btnLogin);
+        create = (Button) findViewById(R.id.btnCreate);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AccessToken.getCurrentAccessToken()==null)
+                {
+                    Intent intent = new Intent(v.getContext(), login.class);
+                    startActivityForResult(intent,0);
+                }else{
+                    Intent intent = new Intent(v.getContext(), Covid.class);
+                    startActivityForResult(intent,0);
+                }
+            }
+        });
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),crearcuenta.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.btnFacebook);
 
@@ -35,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    goMainScreen();
+                    handleFacebookAccessToken(loginResult.getAccessToken());
+                    firebaseAuth.addAuthStateListener(firebaseAuthListener);
                 }
-
-
-
                 @Override
                 public void onCancel() {
                     Toast toast1 =
@@ -57,45 +89,53 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            login = (Button) findViewById(R.id.btnLogin);
-            create = (Button) findViewById(R.id.btnCreate);
-            login.setOnClickListener(new View.OnClickListener() {
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuthListener = new FirebaseAuth.AuthStateListener(){
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), login.class);
-                    startActivityForResult(intent,0);
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user != null) {
+                        goMainScreen();
+                    }
                 }
-            });
+            };
 
-            create.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(),crearcuenta.class);
-                    startActivityForResult(intent,0);
-                }
-            });
         }else{
             Intent intent = new Intent(this,Covid.class);
             startActivityForResult(intent,0);
         }
-
     }
 
 
 
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful())
+                {
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    "No se pudo Iniciar Sesion", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+
+            }
+        });
+    }
+
+
     private void goMainScreen() {
-        Intent intent = new Intent(this, Covid.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
 }

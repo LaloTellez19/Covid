@@ -115,6 +115,7 @@ public class FragmentPaises extends Fragment {
             case R.id.search_icon:
                 // Not implemented here
                 return false;
+
             default:
                 break;
         }
