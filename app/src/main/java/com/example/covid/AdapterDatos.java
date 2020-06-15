@@ -1,29 +1,26 @@
 package com.example.covid;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
+
 import com.example.covid.Model.Countries;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
-import com.squareup.picasso.Picasso;
+
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
+
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> implements View.OnClickListener{
 
@@ -41,11 +38,7 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
-        try {
-            holder.asignarDatos(countries.get(position));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        holder.asignarDatos(countries.get(position));
     }
 
     @Override
@@ -76,9 +69,9 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
         }
 
 
-        void asignarDatos(Countries country) throws MalformedURLException {
+        void asignarDatos(Countries country) {
             dato.setText(country.getName());
-            GlideToVectorYou.init().load(country.getFlag());
+            GlideToVectorYou.justLoadImage((Activity) itemView.getContext(), Uri.parse(country.getFlag()), imagen);
         }
     }
 
