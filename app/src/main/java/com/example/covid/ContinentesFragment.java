@@ -113,6 +113,7 @@ public class ContinentesFragment extends Fragment {
                         Log.d("COUNTRIES", "################## Response ##################");
                         for(Countries country: countries) {
                             Log.d("COUNTRIES", country.getName());
+                            Log.d("FLAGS", country.getFlag());
 
                         }
                         Log.d("COUNTRIES", "################ End Response ################");

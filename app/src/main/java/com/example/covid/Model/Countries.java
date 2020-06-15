@@ -7,10 +7,10 @@ public class Countries {
 
     private String name;
 
-    public String getAlpha2Code() {
-        return alpha2Code;
+    public String getFlag() {
+        return flag;
     }
 
-    private String alpha2Code;
+    private String flag;
 
 }

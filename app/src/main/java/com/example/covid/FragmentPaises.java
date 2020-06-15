@@ -50,7 +50,6 @@ public class FragmentPaises extends Fragment {
     List<Countries> countries;
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
-
     private AdapterDatos adapterDatos;
 
     @Nullable
@@ -65,7 +64,7 @@ public class FragmentPaises extends Fragment {
         adapterDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ;
+
             }
         });
         lista.setAdapter(adapterDatos);

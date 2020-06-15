@@ -5,13 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covid.Model.Countries;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +36,11 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
-        holder.asignarDatos(countries.get(position));
+        try {
+            holder.asignarDatos(countries.get(position));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -54,14 +62,21 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
     class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView dato;
+        ImageView imagen;
 
         ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
             dato = itemView.findViewById(R.id.idDato);
+            imagen = itemView.findViewById(R.id.imageCountry);
         }
 
-        void asignarDatos(Countries country) {
+        void asignarDatos(Countries country) throws MalformedURLException {
             dato.setText(country.getName());
+            Picasso.get()
+                    .load(country.getFlag())
+                    .resize(50,50)
+                    .centerCrop()
+                    .into(imagen);
         }
     }
 
