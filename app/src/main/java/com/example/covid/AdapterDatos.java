@@ -1,5 +1,7 @@
 package com.example.covid;
 
+import android.content.Context;
+import android.graphics.drawable.PictureDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.example.covid.Model.Countries;
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
@@ -70,13 +75,10 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
             imagen = itemView.findViewById(R.id.imageCountry);
         }
 
+
         void asignarDatos(Countries country) throws MalformedURLException {
             dato.setText(country.getName());
-            Picasso.get()
-                    .load(country.getFlag())
-                    .resize(50,50)
-                    .centerCrop()
-                    .into(imagen);
+            GlideToVectorYou.init().load(country.getFlag());
         }
     }
 
