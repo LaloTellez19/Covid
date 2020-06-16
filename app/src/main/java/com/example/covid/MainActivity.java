@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    Button login, create;
+    Button login, create,prueba;
     ProgressBar bar;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
@@ -45,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         bar = (ProgressBar) findViewById(R.id.progressBar1);
         login = (Button) findViewById(R.id.btnLogin);
         create = (Button) findViewById(R.id.btnCreate);
+        prueba = (Button) findViewById(R.id.pruebabtn);
+
+        prueba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Covid.class);
+                startActivityForResult(intent,0);
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

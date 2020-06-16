@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRecyclerFragmet"
-        android:layout_width="325dp"
-        android:layout_height="588dp"
+        android:layout_width="402dp"
+        android:layout_height="591dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
