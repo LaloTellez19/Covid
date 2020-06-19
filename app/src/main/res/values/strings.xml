@@ -18,6 +18,16 @@
     <string name="Pais">Pais</string>
     <string name="facebook_app_id">552253505414843</string>
     <string name="fb_login_protocol_scheme">fb552253505414843</string>
+    <string name="Country">País</string>
+    <string name="NewConfirmed">Nuevos Casos Confirmados</string>
+    <string name="TotalConfirmed">Total de Casos Confirmados</string>
+    <string name="NewDeaths">Nuevas Muertes</string>
+    <string name="TotalDeaths">Total de Muertes</string>
+    <string name="NewRecovered">Nuevos Recuperados</string>
+    <string name="TotalRecovered">Total de Recuperados</string>
+    <string name="numeros">Numeros</string>
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
