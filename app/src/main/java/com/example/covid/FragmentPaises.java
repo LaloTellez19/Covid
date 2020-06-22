@@ -61,6 +61,13 @@ public class FragmentPaises extends Fragment {
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterDatos = new AdapterDatos();
         adapterDatos.countries = countries;
+        /* LayoutInflater inflater = getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.casos_paises,null);
+                androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+                alert.setTitle("SARS COV 2");
+                alert.setView(alertLayout);
+                AlertDialog dialog = alert.create();
+                dialog.show();*/
         lista.setAdapter(adapterDatos);
         return view;
     }
