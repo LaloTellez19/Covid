@@ -56,25 +56,11 @@ public class FragmentPaises extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "Paises: " + countries.toString());
         View view = inflater.inflate(R.layout.paisesfragment,container,false);
         lista =(RecyclerView)view.findViewById(R.id.idRecyclerFragmet);
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterDatos = new AdapterDatos();
         adapterDatos.countries = countries;
-        adapterDatos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = getLayoutInflater();
-                View alertLayout = inflater.inflate(R.layout.casos_paises,null);
-                androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
-                alert.setTitle("SARS-COV 2");
-                alert.setView(alertLayout);
-                AlertDialog dialog = alert.create();
-                dialog.show();
-
-            }
-        });
         lista.setAdapter(adapterDatos);
         return view;
     }

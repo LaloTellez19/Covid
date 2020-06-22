@@ -28,9 +28,6 @@ public class Covid extends AppCompatActivity {
                     .commit();
 
         }
-
-
-
     }
 
     @Override

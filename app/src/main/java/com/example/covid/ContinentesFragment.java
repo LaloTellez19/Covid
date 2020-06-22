@@ -114,6 +114,7 @@ public class ContinentesFragment extends Fragment {
                         for(Countries country: countries) {
                             Log.d("COUNTRIES", country.getName());
                             Log.d("FLAGS", country.getFlag());
+                            Log.d("CODE",country.getAlpha2Code());
 
                         }
                         Log.d("COUNTRIES", "################ End Response ################");

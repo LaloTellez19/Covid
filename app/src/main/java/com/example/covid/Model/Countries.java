@@ -11,6 +11,11 @@ public class Countries {
         return flag;
     }
 
+    public String getAlpha2Code() {
+        return alpha2Code;
+    }
+
+    private String alpha2Code;
     private String flag;
 
 }

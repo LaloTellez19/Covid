@@ -2,7 +2,9 @@ package com.example.covid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -22,17 +25,15 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 
-public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> implements View.OnClickListener{
+public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos>{
 
     List<Countries> countries;
     private View.OnClickListener listener;
-
     @NonNull
     @Override
     public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.itemlist,null,false);
-        view.setOnClickListener(this);
         return new ViewHolderDatos(view);
     }
 
@@ -45,29 +46,17 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
     public int getItemCount() {
         return countries.size();
     }
-    public void setOnClickListener(View.OnClickListener listener)
-    {
-        this.listener=listener;
-    }
 
-    @Override
-    public void onClick(View v) {
-        if(listener != null)
-        {
-            listener.onClick(v);
-        }
-    }
 
     class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView dato;
         ImageView imagen;
-
         ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
             dato = itemView.findViewById(R.id.idDato);
             imagen = itemView.findViewById(R.id.imageCountry);
-        }
 
+        }
 
         void asignarDatos(Countries country) {
             dato.setText(country.getName());
