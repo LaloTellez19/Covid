@@ -1,5 +1,6 @@
 package com.example.covid;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.covid.Interface.RestCountriesApi;
 import com.example.covid.Model.Countries;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,6 +41,7 @@ public class ContinentesFragment extends Fragment {
     static final String TAG = "ContinentesFragment";
     private TextView usertxt;
     ImageView europaim, asiaim, americaim,africaim, oceaniaim;
+    private BottomNavigationView bottomNavigationView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class ContinentesFragment extends Fragment {
         africaim = (ImageView) view.findViewById(R.id.africa);
         oceaniaim = (ImageView) view.findViewById(R.id.oceania);
         usertxt = (TextView) view.findViewById(R.id.user);
+        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.BottonNava);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null)
@@ -68,6 +72,7 @@ public class ContinentesFragment extends Fragment {
         europaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.GONE);
                 getCountriesFor(Continente.Europa);
             }
         });
@@ -75,6 +80,7 @@ public class ContinentesFragment extends Fragment {
         asiaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.GONE);
                 getCountriesFor(Continente.Asia);
             }
         });
@@ -82,6 +88,7 @@ public class ContinentesFragment extends Fragment {
         africaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.GONE);
                 getCountriesFor(Continente.Africa);
             }
         });
@@ -89,6 +96,7 @@ public class ContinentesFragment extends Fragment {
         americaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.GONE);
                 getCountriesFor(Continente.America);
             }
         });
@@ -96,6 +104,7 @@ public class ContinentesFragment extends Fragment {
         oceaniaim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.GONE);
                 getCountriesFor(Continente.Oceania);
             }
         });
@@ -171,4 +180,17 @@ public class ContinentesFragment extends Fragment {
     private void showToastError(String error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
 }
