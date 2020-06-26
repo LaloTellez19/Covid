@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FragmentPaises extends Fragment {
+public class FragmentPaises extends Fragment implements AdapterDatosDelegate {
     static final String TAG = "FragmentPaises";
     SearchView buscar;
     RecyclerView lista;
@@ -62,13 +62,7 @@ public class FragmentPaises extends Fragment {
         lista.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterDatos = new AdapterDatos();
         adapterDatos.countries = countries;
-        /* LayoutInflater inflater = getLayoutInflater();
-                View alertLayout = inflater.inflate(R.layout.casos_paises,null);
-                androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
-                alert.setTitle("SARS COV 2");
-                alert.setView(alertLayout);
-                AlertDialog dialog = alert.create();
-                dialog.show();*/
+        adapterDatos.adapterDatosDelegate = this;
         lista.setAdapter(adapterDatos);
         return view;
     }
@@ -122,5 +116,16 @@ public class FragmentPaises extends Fragment {
         }
         searchView.setOnQueryTextListener(queryTextListener);
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void countrySelected(Countries country) {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.casos_paises,null);
+        androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+        alert.setTitle("SARS COV 2 en " + country.getName());
+        alert.setView(alertLayout);
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }
