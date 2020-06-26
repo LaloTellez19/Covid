@@ -5,8 +5,6 @@ public class Countries {
         return name;
     }
 
-    private String name;
-
     public String getFlag() {
         return flag;
     }
@@ -17,5 +15,5 @@ public class Countries {
 
     private String alpha2Code;
     private String flag;
-
+    private String name;
 }

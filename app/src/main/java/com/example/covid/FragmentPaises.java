@@ -37,12 +37,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.covid.Interface.RestApiCovid;
 import com.example.covid.Model.Countries;
+import com.example.covid.Model.Country;
+import com.example.covid.Model.Summary;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentPaises extends Fragment implements AdapterDatosDelegate {
     static final String TAG = "FragmentPaises";
@@ -120,12 +129,60 @@ public class FragmentPaises extends Fragment implements AdapterDatosDelegate {
 
     @Override
     public void countrySelected(Countries country) {
+        getCases(country);
+    }
+
+    private void getCases(Countries contry)
+    {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.covid19api.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RestApiCovid restApiCovid = retrofit.create(RestApiCovid.class);
+        Call<Summary> call = restApiCovid.getCases();
+        call.enqueue(new Callback<Summary>() {
+            @Override
+            public void onResponse(Call<Summary> call, Response<Summary> response) {
+                if(!response.isSuccessful())
+                {
+                    Log.d("TAG", "Codigo"+response.code());
+                }
+                for(Country countries: response.body().getCountries())
+                {
+                    if(countries.getCountryCode().equals(contry.getAlpha2Code()))
+                    {
+                        showAlert(countries);
+                        return;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Summary> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void showAlert(Country country)
+    {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.casos_paises,null);
+        TextView totalNuevosCasosConfirmados = alertLayout.findViewById(R.id.txtNewConfirmed);
+        TextView totalCasosConfirmaddos = alertLayout.findViewById(R.id.txtTotalConfirmed);
+        TextView totalMuertes = alertLayout.findViewById(R.id.txtTotalDeaths);
+        TextView totalRecuperados = alertLayout.findViewById(R.id.txtTotalRecovered);
+        totalNuevosCasosConfirmados.setText(String.valueOf(country.getNewConfirmed()));
+        totalCasosConfirmaddos.setText(String.valueOf(country.getTotalConfirmed()));
+        totalMuertes.setText(String.valueOf(country.getTotalDeaths()));
+        totalRecuperados.setText(String.valueOf(country.getTotalRecovered()));
         androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
-        alert.setTitle("SARS COV 2 en " + country.getName());
+        alert.setTitle("SARS COV 2 en " + country.getCountry());
         alert.setView(alertLayout);
         AlertDialog dialog = alert.create();
         dialog.show();
     }
+
 }
