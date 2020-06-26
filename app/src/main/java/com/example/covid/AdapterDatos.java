@@ -24,11 +24,15 @@ import java.net.MalformedURLException;
 
 import java.util.List;
 
+interface AdapterDatosDelegate {
+    void countrySelected(Countries country);
+}
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos>{
 
     List<Countries> countries;
     private View.OnClickListener listener;
+    AdapterDatosDelegate adapterDatosDelegate;
     @NonNull
     @Override
     public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,12 +59,20 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
             super(itemView);
             dato = itemView.findViewById(R.id.idDato);
             imagen = itemView.findViewById(R.id.imageCountry);
-
         }
 
         void asignarDatos(Countries country) {
             dato.setText(country.getName());
             GlideToVectorYou.justLoadImage((Activity) itemView.getContext(), Uri.parse(country.getFlag()), imagen);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (adapterDatosDelegate != null) {
+                        adapterDatosDelegate.countrySelected(country);
+                    }
+                }
+            });
         }
     }
 
